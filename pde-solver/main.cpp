@@ -51,11 +51,26 @@ void solve_pde (vector<vector<T>> & f, int steps = 10, bool show_steps = true, b
     }
 }
 
+
+template <typename T>
+void save_csv(const vector<vector<T>>& v, std::string savename = ""){  // save matrix as csv
+    std::ofstream file;
+    file.open(savename);
+    for (const auto& row : v){
+        for (const auto& elem : row){
+            file << elem << ",";
+        }
+        file << "\n";
+    }
+    file.close();
+}
+
 int main()
 {
     vector<vector<double>> f {{1,0,0,0},{1,0,0,0},{1,0,0,0},{1,0,0,0}};
 
     solve_pde (f, 50, false, true);
+    save_csv(f, "f.csv");
 
     return 0;
 }
