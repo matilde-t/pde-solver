@@ -55,7 +55,7 @@ Every project is different, so consider which of these sections apply to yours. 
 pde-solver
 
 ## Description
-This package implements a numerical solution for the heat equation in the form $\nabla^2u = f$, where $f = \frac{\partial u}{\partial t}$.  
+This package implements a numerical solution for the heat equation in the form $`\nabla^2u = f`$, where $`f = \frac{\partial u}{\partial t}`$.  
 
 ## Badges
 On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
