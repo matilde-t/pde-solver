@@ -31,23 +31,31 @@ void print_matrix(std::vector<std::vector<T>>& m){
     }
 }
 
-int main()
-{
-
-    cout << "Hello World!" << endl;
-
-    vector<vector<double>> f {{1,0,0,0},{1,0,0,0},{1,0,0,0},{1,0,0,0}};
-    int steps = 10;
+template <typename T>
+void solve_pde (vector<vector<T>> & f, int steps = 10, bool show_steps = true, bool show_final = false) {
     for(int t = 1; t <= steps; ++t){
         for(int i = 1; i < f.size()-1; ++i){
             for(int j = 1; j < f[i].size()-1; ++j){
                 f[i][j] = (f[i-1][j-1] + f[i-1][j] + f[i][j-1] + f[i][j+1] + f[i+1][j]
-                        + f[i+1][j+1] + f[i-1][j+1] + f[i+1][j-1])/8  ;
+                        + f[i+1][j+1] + f[i-1][j+1] + f[i+1][j-1])/(T)8  ;
             }
         }
-    print_matrix(f);
-    cout << "\n";
+    if (show_steps) {
+        print_matrix(f);
+        cout << "\n";
     }
+    }
+    if (show_final) {
+        print_matrix(f);
+        cout << "\n";
+    }
+}
+
+int main()
+{
+    vector<vector<double>> f {{1,0,0,0},{1,0,0,0},{1,0,0,0},{1,0,0,0}};
+
+    solve_pde (f, 50, false, true);
 
     return 0;
 }
