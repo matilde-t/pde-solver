@@ -75,8 +75,8 @@ If you have any issue, reach out at ge83bug(at)tum.de
 ## Roadmap
 The next steps in the development of these project are:
 - First phase
-	- output the steady-state values of each node in a result file,
-	- write unit tests;
+	- output the steady-state values of each node in a result file
+	- write unit tests
 - Second phase 
 	- refactor in a object oriented way
 	- add different coordinate systems support
