@@ -1,8 +1,19 @@
 #include <iostream>
 #include <vector>
+#include <matplot/matplot.h>
 
 using namespace std;
+using namespace matplot;
 
+template <typename T>
+void plot(const vector<vector<T>>& v, std::string savename = ""){  // plot matrix as an image
+            matplot::imagesc(v);
+            matplot::colorbar();
+            matplot::show();
+            if(not(savename == "")){
+                matplot::save(savename);
+            }
+        }
 
 
 template <typename T>
