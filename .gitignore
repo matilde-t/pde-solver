@@ -1,3 +1,7 @@
 build*
 *CMakeLists.txt.user
 pde-solver/.gitignore
+pde-solver/.vscode
+pde-solver/CMakeLists.txt
+pde-solver/main
+pde-solver/build/
