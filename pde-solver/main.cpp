@@ -49,13 +49,14 @@ vector<vector<double>> populate_matrix(vector<vector<double>>& m, int m_type, ch
 }
 
 template <typename T>
-void plot(const vector<vector<T>>& v, std::string savename = ""){  // plot matrix as an image
-            matplot::imagesc(v);
-            matplot::colorbar();
-            matplot::show();
-            if(not(savename == "")){
-                matplot::save(savename);
+auto plot(const vector<vector<T>>& v, std::string savename = ""){  // plot matrix as an image
+            auto fig = imagesc(v);
+            colorbar();
+            if(savename != ""){
+                save(savename);
             }
+            show();
+            return fig;
         }
 
 
@@ -81,7 +82,7 @@ void solve_pde (vector<vector<T>> & f, const vector<vector<T>> & h, int steps = 
         for(int i = 1; i < f.size()-1; ++i){
             for(int j = 1; j < f[i].size()-1; ++j){
                 f[i][j] = (f[i-1][j-1] + f[i-1][j] + f[i][j-1] + f[i][j+1] + f[i+1][j]
-                        + f[i+1][j+1] + f[i-1][j+1] + f[i+1][j-1])/(T)8 + h[i][j] ;
+                        + f[i+1][j+1] + f[i-1][j+1] + f[i+1][j-1])/(T)8 + h[i][j]/2 ;
             }
         }
     if (show_steps) {
@@ -140,7 +141,8 @@ int main()
 
     solve_pde (f, h, 50, true, true);
     save_csv(f, "f.csv");
-    plot(f);
+    auto fig = plot(f);
+    save("test.png");
 
     return 0;
 }
