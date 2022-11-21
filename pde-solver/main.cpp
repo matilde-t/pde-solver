@@ -72,15 +72,16 @@ void print_matrix(std::vector<std::vector<T>>& m){
     for (const auto& v : m){
         print_vector(v);
     }
+    cout << "\n";
 }
 
 template <typename T>
-void solve_pde (vector<vector<T>> & f, int steps = 10, bool show_steps = true, bool show_final = false) {
+void solve_pde (vector<vector<T>> & f, const vector<vector<T>> & h, int steps = 10, bool show_steps = true, bool show_final = false) {
     for(int t = 1; t <= steps; ++t){
         for(int i = 1; i < f.size()-1; ++i){
             for(int j = 1; j < f[i].size()-1; ++j){
                 f[i][j] = (f[i-1][j-1] + f[i-1][j] + f[i][j-1] + f[i][j+1] + f[i+1][j]
-                        + f[i+1][j+1] + f[i-1][j+1] + f[i+1][j-1])/(T)8  ;
+                        + f[i+1][j+1] + f[i-1][j+1] + f[i+1][j-1])/(T)8 + h[i][j] ;
             }
         }
     if (show_steps) {
@@ -129,7 +130,7 @@ int main()
     cin >> h_type;
     h = populate_matrix(h,h_type,'h');
 
-    cout << "Your matrices are\n h:\n";
+    cout << "Your matrices are\n f:\n";
     print_matrix(f);
     cout << "h:\n";
     print_matrix(h);
@@ -137,7 +138,7 @@ int main()
 
     //vector<vector<double>> f {{1,0,0,0},{1,0,0,0},{1,0,0,0},{1,0,0,0}};
 
-    solve_pde (f, 50, false, true);
+    solve_pde (f, h, 50, true, true);
     save_csv(f, "f.csv");
     plot(f);
 
