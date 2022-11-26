@@ -4,3 +4,4 @@ pde-solver/.gitignore
 pde-solver/.vscode
 pde-solver/main
 pde-solver/build/
+.vscode
