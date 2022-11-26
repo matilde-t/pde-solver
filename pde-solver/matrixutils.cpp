@@ -19,6 +19,8 @@ populate_matrix(std::vector<std::vector<double>> &m, int m_type,
         v[0] = 1;
       }
       break;
+    default:
+      throw(std::invalid_argument("Invalid option"));
     }
   } else {
     switch (m_type) {
@@ -45,6 +47,8 @@ populate_matrix(std::vector<std::vector<double>> &m, int m_type,
       i = round(2 * m[0].size() / 3);
       m[j][i] = -1;
       break;
+    default:
+      throw(std::invalid_argument("Invalid option"));
     }
   }
   return m;

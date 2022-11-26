@@ -17,9 +17,15 @@ int main() {
           "First, please input the desired row dimension (N) of your 2D matrix "
           ": ";
   cin >> dim1_input;
+  if (dim1_input < 3) {
+    throw(std::invalid_argument("Invalid dimension"));
+  }
   cout << "Now, please input the desired column dimension (M) of your 2D "
           "matrix : ";
   cin >> dim2_input;
+  if (dim2_input < 3) {
+    throw(std::invalid_argument("Invalid dimension"));
+  }
   auto f = create_matrix(dim1_input, dim2_input);
   auto h = f;
 
@@ -43,27 +49,25 @@ int main() {
 
   int num_it;
   cout << "The default number of iterations is 50, do you want to change it? "
-          "y/n\n";
+          "Y/n\n";
 
   if (get_input()) {
     cout << "How many iterations do you want?\n";
     cin >> num_it;
   } else {
     num_it = 50;
-    ;
   }
 
-  char show_it;
-  cout << "Do you want to see each iteration step? y/n\n";
-  cin >> show_it;
-
-  switch (show_it) {
-  case 'y':
-    solve_pde(f, h, num_it, true, true);
-    break;
-
-  default:
-    break;
+  cout << "Do you want to see each iteration step? Y/n\n";
+  if (get_input()) {
+    solve_pde(f, h, num_it, true);
+  } else {
+    cout << "Do you want to see the final step? Y/n\n";
+    if (get_input()) {
+      solve_pde(f, h, num_it, false, true);
+    } else {
+      solve_pde(f, h, num_it, false, false);
+    }
   }
 
   save_csv(f, "f.csv");
