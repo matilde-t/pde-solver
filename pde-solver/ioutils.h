@@ -7,7 +7,7 @@
 
 template <typename T>
 void save_csv(const std::vector<std::vector<T>> &v,
-              std::string savename = "") { // save matrix as csv
+              std::string savename) { // save matrix as csv
   std::ofstream file;
   file.open(savename);
   for (const auto &row : v) {

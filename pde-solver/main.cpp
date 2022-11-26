@@ -76,9 +76,30 @@ int main() {
     }
   }
 
-  save_csv(f, "f.csv");
+  cout << "Do you want to save the final matrix? Y/n\n";
+  if (get_input()) {
+    cout << "Please input the name of the file you want to save the matrix "
+            "into (without extension):\n";
+    string name;
+    getline(cin, name);
+    name.append(".csv");
+    save_csv(f, name);
+  }
+
+  cout << "Do you want to save the final plot? Y/n\n";
+  auto save_flag = get_input();
+  string name;
+  if (save_flag) {
+    cout << "Please input the name of the file you want to save the plot "
+            "into (without extension):\n";
+    getline(cin, name);
+    name.append(".png");
+  }
+
   plot(f);
-  save("test.png");
+  if (save_flag) {
+    save(name);
+  }
 
   return 0;
 }
