@@ -2,6 +2,7 @@
 #include "matrixutils.h"
 #include "pdesolver.h"
 #include "plotutils.h"
+#include <cmath>
 #include <iostream>
 #include <matplot/matplot.h>
 #include <string>
@@ -47,13 +48,18 @@ int main() {
   cout << "h:\n";
   print_matrix(h);
 
+  std::cin.clear();
+  std::cin.ignore();
+
   int num_it;
   cout << "The default number of iterations is 50, do you want to change it? "
           "Y/n\n";
 
   if (get_input()) {
     cout << "How many iterations do you want?\n";
-    cin >> num_it;
+    string line;
+    getline(cin, line);
+    num_it = stoi(line);
   } else {
     num_it = 50;
   }

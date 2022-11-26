@@ -2,8 +2,10 @@
 #include <iostream>
 
 bool get_input(void) {
+  /*
   std::cin.clear();
   std::cin.ignore();
+  */
   std::string line;
   std::getline(std::cin, line);
   if (line == "y" || line.empty()) {
