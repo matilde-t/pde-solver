@@ -9,9 +9,6 @@
 ## Description
 This package implements a numerical solution for the heat equation in the form $`f = h`$, where $`f = \nabla^2u`$ and $`h = \frac{\partial u}{\partial t}`$.  
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
 ## Visuals
 ![10x10 matrix, left heated border, one heat source and one sink, equispaced](./display.png "10x10 matrix, left heated border, one heat source and one sink, equispaced") "10x10 matrix, left heated border, one heat source and one sink, equispaced"
 
