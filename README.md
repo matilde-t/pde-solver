@@ -10,7 +10,7 @@
 This package implements a numerical solution for the heat equation in the form $`f = h`$, where $`f = \nabla^2u`$ and $`h = \frac{\partial u}{\partial t}`$.  
 
 ## Visuals
-![10x10 matrix, left heated border, one heat source and one sink, equispaced](./READMEimage.png "10x10 matrix, left heated border, one heat source and one sink, equispaced") "10x10 matrix, left heated border, one heat source and one sink, equispaced"
+![10x10 matrix, left heated border, one heat source and one sink, equispaced](./READMEimage.png) "10x10 matrix, left heated border, one heat source and one sink, equispaced"
 
 ## Prerequisites
 The graphical representation relies on `gnuplot`, which can be installed through the main Linux package managers, like `apt` etc
