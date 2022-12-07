@@ -5,7 +5,7 @@ project(pde-solver LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(pde-solver test.cpp main.cpp ioutils.cpp matrixutils.cpp pdesolver.h ioutils.h plotutils.h matrixutils.h)
+add_executable(pde-solver main.cpp ioutils.cpp matrixutils.cpp pdesolver.h ioutils.h plotutils.h matrixutils.h)
 
 install(TARGETS pde-solver
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
@@ -45,7 +45,22 @@ CPMAddPackage("gh:catchorg/Catch2@2.13.4")
 target_link_libraries(pde-solver matplot Catch2)
 target_compile_features(pde-solver PRIVATE cxx_std_17)
 
+
+# -----
+
+
+add_executable(pde-solver-test test.cpp ioutils.cpp matrixutils.cpp pdesolver.h ioutils.h plotutils.h matrixutils.h)
+
+install(TARGETS pde-solver-test
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
+# ---- Create binary ----
+
+target_link_libraries(pde-solver-test matplot Catch2)
+target_compile_features(pde-solver-test PRIVATE cxx_std_17)
+
 # ---- Enable testing ----
 
 enable_testing()
-add_test(mytest pde-solver)
+add_test(mytest pde-solver-test)
+
