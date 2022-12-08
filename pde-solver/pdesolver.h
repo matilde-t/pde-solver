@@ -5,9 +5,9 @@
 #include <vector>
 
 template <typename T>
-void solve_pde(std::vector<std::vector<T>> &f,
-               const std::vector<std::vector<T>> &h, int steps = 50,
-               bool show_steps = true, bool show_final = false) {
+std::vector<std::vector<T>>
+solve_pde(std::vector<std::vector<T>> &f, const std::vector<std::vector<T>> &h,
+          int steps = 50, bool show_steps = true, bool show_final = false) {
   for (int t = 1; t <= steps; ++t) {
     for (int i = 1; i < f.size() - 1; ++i) {
       for (int j = 1; j < f[i].size() - 1; ++j) {
@@ -27,6 +27,7 @@ void solve_pde(std::vector<std::vector<T>> &f,
     print_matrix(f);
     std::cout << "\n";
   }
+  return f;
 }
 
 #endif // PDESOLVER_H
