@@ -1,6 +1,7 @@
 #ifndef MATRIXUTILS_H
 #define MATRIXUTILS_H
 
+#include <algorithm>
 #include <iostream>
 #include <vector>
 
@@ -23,5 +24,10 @@ template <typename T> void print_matrix(std::vector<std::vector<T>> &m) {
   }
   std::cout << "\n";
 }
+
+
+std::vector<std::vector<double>> mat_subtract(std::vector<std::vector<double>> a, std::vector<std::vector<double>> b);
+
+
 
 #endif // MATRIXUTILS_H

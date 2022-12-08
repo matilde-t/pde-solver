@@ -53,3 +53,14 @@ populate_matrix(std::vector<std::vector<double>> &m, int m_type,
   }
   return m;
 }
+
+std::vector<std::vector<double>> mat_subtract(std::vector<std::vector<double>> a, std::vector<std::vector<double>> b){
+    if (a.size()!=a.size()){throw std::invalid_argument( "Vector dimension mismatch: mismatched rows" );}
+    if (a[0].size()!=b[0].size()){throw std::invalid_argument( "Vector dimension mismatch: mismatched columns" );}
+    std::vector<std::vector<double>> result(a[0].size());
+    for(int i = 0; i< a.size(); i++){
+        std::transform(a[i].begin(), a[i].end(), b[i].begin(), a[i].begin(), std::minus<double>());
+        result[i] = a[i];
+    }
+    return result;
+}
