@@ -1,7 +1,5 @@
 #define CATCH_CONFIG_MAIN
-#include "matrixutils.h"
 #include "pdesolver.h"
-#include "plotutils.h"
 #include <catch2/catch.hpp>
 #include <cstdint>
 
