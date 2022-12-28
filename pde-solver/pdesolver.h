@@ -1,9 +1,9 @@
 #ifndef PDESOLVER_H
 #define PDESOLVER_H
 
+#include "matrixutils.h"
 #include <iostream>
 #include <vector>
-#include "matrixutils.h"
 
 template <typename T>
 std::vector<std::vector<T>>

@@ -8,16 +8,17 @@
 
 int main() {
   int dim1_input, dim2_input, f_type, h_type;
-  std::cout << "Let's build a 2D matrix (NxM) for the heat distribution\n"
-          "It must be at least a 3x3 matrix\n"
-          "First, please input the desired row dimension (N) of your 2D matrix "
-          ": ";
+  std::cout
+      << "Let's build a 2D matrix (NxM) for the heat distribution\n"
+         "It must be at least a 3x3 matrix\n"
+         "First, please input the desired row dimension (N) of your 2D matrix "
+         ": ";
   std::cin >> dim1_input;
   if (dim1_input < 3) {
     throw(std::invalid_argument("Invalid dimension"));
   }
   std::cout << "Now, please input the desired column dimension (M) of your 2D "
-          "matrix : ";
+               "matrix : ";
   std::cin >> dim2_input;
   if (dim2_input < 3) {
     throw(std::invalid_argument("Invalid dimension"));
@@ -25,16 +26,17 @@ int main() {
   auto f = create_matrix(dim1_input, dim2_input);
   auto h = f;
 
-  std::cout << "Please your desired f from the following list:\n 1. Plate with no "
-          "heat\n 2. Plate with left heated border\n\n";
+  std::cout
+      << "Please your desired f from the following list:\n 1. Plate with no "
+         "heat\n 2. Plate with left heated border\n\n";
   std::cin >> f_type;
   f = populate_matrix(f, f_type, 'f');
 
   std::cout << "Please choose your desired h (internal heat/sink source "
-          "distribution) from the following list:\n 1. No internal heat "
-          "sources\n "
-          "2. One heat source in the middle\n 3. Two heat sources, "
-          "equispaced\n 4. One heat source and one sink, equispaced\n\n";
+               "distribution) from the following list:\n 1. No internal heat "
+               "sources\n "
+               "2. One heat source in the middle\n 3. Two heat sources, "
+               "equispaced\n 4. One heat source and one sink, equispaced\n\n";
   std::cin >> h_type;
   h = populate_matrix(h, h_type, 'h');
 
@@ -47,8 +49,9 @@ int main() {
   std::cin.ignore();
 
   int num_it;
-  std::cout << "The default number of iterations is 50, do you want to change it? "
-          "Y/n\n";
+  std::cout
+      << "The default number of iterations is 50, do you want to change it? "
+         "Y/n\n";
 
   if (ask_user()) {
     std::cout << "How many iterations do you want?\n";
@@ -73,8 +76,9 @@ int main() {
 
   std::cout << "Do you want to save the final matrix? Y/n\n";
   if (ask_user()) {
-    std::cout << "Please input the name of the file you want to save the matrix "
-            "into (without extension):\n";
+    std::cout
+        << "Please input the name of the file you want to save the matrix "
+           "into (without extension):\n";
     std::string name;
     getline(std::cin, name);
     name.append(".csv");
@@ -86,7 +90,7 @@ int main() {
   std::string name;
   if (save_flag) {
     std::cout << "Please input the name of the file you want to save the plot "
-            "into (without extension):\n";
+                 "into (without extension):\n";
     getline(std::cin, name);
     name.append(".png");
   }
