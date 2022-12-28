@@ -1,7 +1,7 @@
 #include "ioutils.h"
 #include <iostream>
 
-bool get_input(void) {
+bool ask_user(void) {
   /*
   std::cin.clear();
   std::cin.ignore();

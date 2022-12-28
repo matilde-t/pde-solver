@@ -55,7 +55,7 @@ int main() {
   cout << "The default number of iterations is 50, do you want to change it? "
           "Y/n\n";
 
-  if (get_input()) {
+  if (ask_user()) {
     cout << "How many iterations do you want?\n";
     string line;
     getline(cin, line);
@@ -65,11 +65,11 @@ int main() {
   }
 
   cout << "Do you want to see each iteration step? Y/n\n";
-  if (get_input()) {
+  if (ask_user()) {
     solve_pde(f, h, num_it, true);
   } else {
     cout << "Do you want to see the final step? Y/n\n";
-    if (get_input()) {
+    if (ask_user()) {
       solve_pde(f, h, num_it, false, true);
     } else {
       solve_pde(f, h, num_it, false, false);
@@ -77,7 +77,7 @@ int main() {
   }
 
   cout << "Do you want to save the final matrix? Y/n\n";
-  if (get_input()) {
+  if (ask_user()) {
     cout << "Please input the name of the file you want to save the matrix "
             "into (without extension):\n";
     string name;
@@ -87,7 +87,7 @@ int main() {
   }
 
   cout << "Do you want to save the final plot? Y/n\n";
-  auto save_flag = get_input();
+  auto save_flag = ask_user();
   string name;
   if (save_flag) {
     cout << "Please input the name of the file you want to save the plot "

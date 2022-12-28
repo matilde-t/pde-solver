@@ -19,6 +19,6 @@ void save_csv(const std::vector<std::vector<T>> &v,
   file.close();
 }
 
-bool get_input(void);
+bool ask_user(void);
 
 #endif // IOUTILS_H
