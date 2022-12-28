@@ -38,7 +38,7 @@ CPMAddPackage(
     GIT_TAG origin/master # or whatever tag you want
 )
 
-CPMAddPackage("gh:catchorg/Catch2@2.13.4")
+CPMAddPackage("gh:catchorg/Catch2@2.13.9")
 
 # ---- Create binary ----
 

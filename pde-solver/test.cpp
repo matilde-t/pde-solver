@@ -2,6 +2,7 @@
 #include "pdesolver.h"
 #include <catch2/catch.hpp>
 #include <cstdint>
+#include "matrixutils.h"
 
 std::vector<std::vector<double>> test_matrix = {
     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
