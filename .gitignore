@@ -1,0 +1,9 @@
+build*
+*CMakeLists.txt.user
+pde-solver/.gitignore
+pde-solver/.vscode
+pde-solver/main
+pde-solver/build/
+.vscode
+.idea/
+pde-solver/cmake-build-debug/
