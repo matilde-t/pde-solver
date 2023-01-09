@@ -1,7 +1,6 @@
 #include "ioutils.h"
 #include "matrixutils.h"
 #include "pdesolver.h"
-#include "plotutils.h"
 #include <iostream>
 #include <matplot/matplot.h>
 #include <string>
@@ -23,14 +22,14 @@ int main() {
   if (dim2_input < 3) {
     throw(std::invalid_argument("Invalid dimension"));
   }
-  auto f = create_matrix(dim1_input, dim2_input);
+  matrix f = matrix(dim1_input, dim2_input);
   auto h = f;
 
   std::cout
       << "Please your desired f from the following list:\n 1. Plate with no "
          "heat\n 2. Plate with left heated border\n\n";
   std::cin >> f_type;
-  f = populate_matrix(f, f_type, 'f');
+  f.populate(f_type, 'f');
 
   std::cout << "Please choose your desired h (internal heat/sink source "
                "distribution) from the following list:\n 1. No internal heat "
@@ -38,12 +37,12 @@ int main() {
                "2. One heat source in the middle\n 3. Two heat sources, "
                "equispaced\n 4. One heat source and one sink, equispaced\n\n";
   std::cin >> h_type;
-  h = populate_matrix(h, h_type, 'h');
+  h.populate(h_type, 'h');
 
   std::cout << "Your matrices are\n f:\n";
-  print_matrix(f);
+  f.print();
   std::cout << "h:\n";
-  print_matrix(h);
+  h.print();
 
   std::cin.clear();
   std::cin.ignore();
@@ -82,7 +81,7 @@ int main() {
     std::string name;
     getline(std::cin, name);
     name.append(".csv");
-    save_csv(f, name);
+    f.save_csv(name);
   }
 
   std::cout << "Do you want to save the final plot? Y/n\n";
@@ -95,7 +94,7 @@ int main() {
     name.append(".png");
   }
 
-  plot(f);
+  f.plot();
   if (save_flag) {
     matplot::save(name);
   }
