@@ -37,7 +37,7 @@ If you have any issue, [contact us](mailto:ge83bug(at)tum.de).
 The next steps in the development of these project are:
 - First phase
 	- output the steady-state values of each node in a result file :heavy_check_mark:
-	- write unit tests
+	- write unit tests :heavy_check_mark:
 - Second phase 
 	- refactor in a object oriented way
 	- add different coordinate systems support
