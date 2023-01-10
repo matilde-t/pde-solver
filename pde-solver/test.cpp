@@ -38,15 +38,20 @@ double tol = 1e-06;
 std::vector<double> tol_vect(n, tol);
 std::vector<std::vector<double>> tol_mat(n, tol_vect);
 
+matrix f_m(f);
+matrix h_m(h);
+
 TEST_CASE("Test and benchmark pde-solver") {
-  std::vector<std::vector<double>> a = solve_pde(f, h, steps, false, false);
+  matrix a = solve_pde(f_m, h_m, steps, false, false);
   REQUIRE(a.size() == test_matrix.size());
   REQUIRE(std::cout << a[1][1] - test_matrix[1][1]);
   // std::cout << test_matrix[a.size()][a[0].size()];
 
   for (int i = 1; i < a.size() - 1; ++i) {
     for (int j = 1; j < a[i].size() - 1; ++j) {
-      REQUIRE(std::abs(a[i][j] - test_matrix[i][j]) < 1);
+      REQUIRE(std::abs(a[i][j] - test_matrix[i][j]) /
+                  std::abs(test_matrix[i][j]) <
+              1);
     }
   }
 }
