@@ -23,12 +23,13 @@ int main() {
     throw(std::invalid_argument("Invalid dimension"));
   }
   matrix f = matrix(dim1_input, dim2_input);
-  auto h = f;
+  matrix h = matrix(dim1_input, dim2_input);
 
   std::cout
       << "Please your desired f from the following list:\n 1. Plate with no "
          "heat\n 2. Plate with left heated border\n\n";
   std::cin >> f_type;
+  
   f.populate(f_type, 'f');
 
   std::cout << "Please choose your desired h (internal heat/sink source "

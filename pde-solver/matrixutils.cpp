@@ -15,7 +15,8 @@ template <typename T> void print_vector(const std::vector<T> &v) {
 
 // Matrix constructors
 matrix::matrix(int dim1, int dim2) {
-  std::vector<std::vector<double>> _m(dim1, std::vector<double>(dim2, 0));
+  std::vector<std::vector<double>> m(dim1, std::vector<double>(dim2, 0));
+  _m = m;
 };
 
 matrix::matrix(std::vector<std::vector<double>> mat) { _m = mat; }
