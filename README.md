@@ -39,22 +39,25 @@ The next steps in the development of these project are:
 	- output the steady-state values of each node in a result file :heavy_check_mark:
 	- write unit tests :heavy_check_mark:
 - Second phase 
-	- refactor in a object oriented way
-	- add different coordinate systems support
-	- add relaxation schemes
-	- add boundary conditions
+	- refactor in a object oriented way :heavy_check_mark:
+	- add relaxation schemes 
+	- add boundary conditions :heavy_check_mark:
 - Third phase
 	- analyze performance
 	- improve performance
 
 ## Contributing
-TODO
+- Fork the project
+- You can modify the following modules:
+  - the **solver**, which is defined in `pdesolver.h` and implemented in the `pdesolver.cpp`
+  - the **input matrices** , which are constructed through the `matrix` class, defined in `matrixutils.h` and implemented in the `matrixutils.cpp` 
+- Once you're done, open a pull request with us on GitLab
 
 ## Authors and acknowledgment
 Authors: Matilde Tozzi (ge83bug(at)tum.de), Celia Tundidor Centeno (ge87loj(at)mytum.de)
 
 ## License
-TODO
+MIT
 
 ## Project status
 Actively developed.
