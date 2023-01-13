@@ -11,6 +11,11 @@ template <typename T> void print_vector(const std::vector<T> &v) {
   std::cout << "\n";
 }
 
+double calcAvg(std::vector<double>& v){  // computes the average for a vector of doubles
+    int const count = static_cast<float>(v.size());
+    return std::reduce(v.begin(), v.end()) / count;
+}
+
 // Matrix methods
 
 // Matrix constructors
@@ -66,7 +71,7 @@ void matrix::populate(int m_type, char switch_options) {
   }
 };
 
-void matrix::print() {
+void matrix::print() const {
   for (const auto &v : _m) {
     print_vector(v);
   }
@@ -95,6 +100,24 @@ void matrix::save_csv(std::string savename) {
   file.close();
 };
 
+double matrix::avg(){  // computes the average for a 2D matrix expressed as a vector of vectors with doubles
+    double sum = 0;
+    for(std::vector<double>& subvect : _m){
+        sum += calcAvg(subvect) / _m.size();
+    }
+    return sum;
+}
+
 size_t matrix::size() { return _m.size(); };
 
 std::vector<double> matrix::operator[](int i) { return _m[i]; }
+
+matrix matrix::operator-(const matrix& other){
+    if (_m.size()!=other._m.size()){throw std::invalid_argument( "Vector dimension mismatch" );}
+    std::vector<std::vector<double>> v3(_m.size());
+    for(int i = 0; i< _m.size(); i++){
+        std::transform(_m[i].begin(), _m[i].end(), other._m[i].begin(), _m[i].begin(), std::minus<double>());
+        v3[i] = _m[i];
+    }
+    return matrix(v3);
+}

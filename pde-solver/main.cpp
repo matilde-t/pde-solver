@@ -64,13 +64,13 @@ int main() {
 
   std::cout << "Do you want to see each iteration step? Y/n\n";
   if (ask_user()) {
-    solve_pde(f, h, num_it, true);
+    gauss(f, h, num_it, true);
   } else {
     std::cout << "Do you want to see the final step? Y/n\n";
     if (ask_user()) {
-      solve_pde(f, h, num_it, false, true);
+      gauss(f, h, num_it, false, true);
     } else {
-      solve_pde(f, h, num_it, false, false);
+      gauss(f, h, num_it, false, false);
     }
   }
 
