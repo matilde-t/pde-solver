@@ -16,6 +16,7 @@ double calcAvg(std::vector<double>& v){  // computes the average for a vector of
     return std::reduce(v.begin(), v.end()) / count;
 }
 
+
 // Matrix methods
 
 // Matrix constructors
@@ -99,6 +100,28 @@ void matrix::save_csv(std::string savename) {
   }
   file.close();
 };
+
+matrix matrix::abs() { // returns matrix with absolute values
+  double max = -400;
+  auto m = _m;
+  for (auto &v : m) {
+      for (auto &n : v) {
+        n = std::abs(n);
+        }
+      }
+  return matrix(m);
+  }
+
+double matrix::max() { // returns the maximum value in the matrix
+  double max = -400;
+  for (const auto &v : _m) {
+      double result = *std::max_element(v.begin(), v.end());
+      if (result > max){
+                   max = result;
+    }
+  }
+  return max;
+}
 
 double matrix::avg(){  // computes the average for a 2D matrix expressed as a vector of vectors with doubles
     double sum = 0;

@@ -20,6 +20,8 @@ public:
   void print() const;
   void plot(std::string savename = "");
   void save_csv(std::string savename);
+  double max();  // returns the maximum value in the matrix
+  matrix abs();  // returns matrix with absolute values
   double avg();
   size_t size();
   std::vector<double> operator[](int i);
