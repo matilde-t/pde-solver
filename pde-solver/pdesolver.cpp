@@ -3,7 +3,31 @@
 #include <vector>
 #include <cmath>
 
+
+
+
+
 matrix solve_pde(matrix &f, const matrix &h, int steps = 50,
+                 bool show_steps = true, bool show_final = false, int solver_type = 3) {
+    switch (solver_type) {
+    case 1:  // 1. Diffusion (visual approximation)
+        f = diffusion(f, h, steps, show_steps, show_final);
+        break;
+    case 2:  // 2. Jacobi
+        f = jacobi(f, h, steps, show_steps, show_final);
+        break;
+    case 3: // 3. Gauss-Seidel
+        f = gauss(f, h, steps, show_steps, show_final);
+        break;
+    default:
+        throw(std::invalid_argument("Invalid option"));
+    }
+    return f;
+}
+
+
+
+matrix diffusion(matrix &f, const matrix &h, int steps = 50,
                  bool show_steps = true, bool show_final = false) {
   for (int t = 1; t <= steps; ++t) {
     for (int i = 1; i < f._m.size() - 1; ++i) {
@@ -26,7 +50,6 @@ matrix solve_pde(matrix &f, const matrix &h, int steps = 50,
   }
   return f;
 }
-
 
 
 matrix jacobi(matrix &f, const matrix &h, int steps, bool show_steps, bool show_final){

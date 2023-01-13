@@ -6,7 +6,7 @@
 #include <string>
 
 int main() {
-  int dim1_input, dim2_input, f_type, h_type;
+  int dim1_input, dim2_input, f_type, h_type, solver_type;
   std::cout
       << "Let's build a 2D matrix (NxM) for the heat distribution\n"
          "It must be at least a 3x3 matrix\n"
@@ -26,7 +26,7 @@ int main() {
   matrix h = matrix(dim1_input, dim2_input);
 
   std::cout
-      << "Please your desired f from the following list:\n 1. Plate with no "
+      << "Please choose your desired f from the following list:\n 1. Plate with no "
          "heat\n 2. Plate with left heated border\n\n";
   std::cin >> f_type;
   
@@ -47,6 +47,10 @@ int main() {
 
   std::cin.clear();
   std::cin.ignore();
+
+  std::cout
+      << "Please choose your desired relaxation method from the following list:\n 1. Diffusion (visual approximation) \n 2. Jacobi \n 3. Gauss-Seidel\n\n";
+  std::cin >> solver_type;
 
   int num_it;
   std::cout

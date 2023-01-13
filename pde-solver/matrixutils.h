@@ -28,8 +28,8 @@ public:
   matrix operator-(const matrix& other);
 
 
-  friend matrix solve_pde(matrix &f, const matrix &h, int steps,
-                          bool show_steps, bool show_final);
+  friend matrix solve_pde(matrix &f, const matrix &h, int steps, bool show_steps, bool show_final,int solver_type);
+  friend matrix diffusion(matrix &f, const matrix &h, int steps, bool show_steps, bool show_final);
   friend matrix jacobi(matrix &f, const matrix &h, int steps, bool show_steps, bool show_final);
   friend matrix gauss(matrix &f, const matrix &h, int steps, bool show_steps, bool show_final);
 };
