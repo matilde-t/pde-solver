@@ -53,28 +53,26 @@ int main() {
   std::cin >> solver_type;
 
   int num_it;
-  std::cout
-      << "The default number of iterations is 50, do you want to change it? "
-         "Y/n\n";
-
+  std::cout << "The default number of iterations is 50, do you want to change it? Y/n\n";
+  auto ask = ask_user();
   if (ask_user()) {
-    std::cout << "How many iterations do you want?\n";
-    std::string line;
-    getline(std::cin, line);
-    num_it = stoi(line);
+      std::cout << "How many iterations do you want?\n";
+      std::string line;
+      getline(std::cin, line);
+      num_it = stoi(line);
   } else {
-    num_it = 50;
+      num_it = 50;
   }
 
   std::cout << "Do you want to see each iteration step? Y/n\n";
   if (ask_user()) {
-    gauss(f, h, num_it, true);
+    solve_pde(f, h, num_it, true, solver_type);
   } else {
     std::cout << "Do you want to see the final step? Y/n\n";
     if (ask_user()) {
-      gauss(f, h, num_it, false, true);
+      solve_pde(f, h, num_it, false, true, solver_type);
     } else {
-      gauss(f, h, num_it, false, false);
+      solve_pde(f, h, num_it, false, false, solver_type);
     }
   }
 
