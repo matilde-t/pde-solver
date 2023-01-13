@@ -48,20 +48,21 @@ matrix jacobi(matrix &f, const matrix &h, int steps, bool show_steps, bool show_
                 //f._m[i][j] = (  ((f_old._m[i-1][j]+f_old._m[i+1][j])/(pow(dx,2)))   + ((f_old._m[i][j-1]+f_old._m[i][j+1])/(pow(dy,2)))  + h._m[i][j] ) / term;
 
                 //error = (f - f_old).avg();
-                f_old = f;
-                t = t+1;
+
             }
-          }
-          if (show_steps) {
+        }
+        f_old = f;
+        t = t+1;
+        if (show_steps) {
             f.print();
             h.print();
 
-          }}
+        }}
 
     if (show_final) {
-      f.print();
-      h.print();
-      std::cout << "\n";
+        f.print();
+        h.print();
+        std::cout << "\n";
     }
 
     return f;
@@ -78,24 +79,23 @@ matrix gauss(matrix &f, const matrix &h, int steps, bool show_steps, bool show_f
     double tol=1e-5;
     int t =0;
 
-    while(error>tol && t<=steps){
+    while(error>tol && t<steps){
         for (int i = 1; i < f._m.size() - 1; ++i) {
             for (int j = 1; j < f._m[i].size() - 1; ++j) {
 
-
                 f._m[i][j] =( (f._m[i+1][j] + f._m[i-1][j])/pow(dx,2) + (f._m[i][j+1] + f._m[i][j-1])/pow(dy,2) + h._m[i][j] )/term ;
-                t = t+1;
             }
-          }
-          if (show_steps) {
+        }
+        t = t+1;
+        if (show_steps) {
             f.print();
 
-          }}
+        }}
 
     if (show_final) {
-      f.print();
-      h.print();
-      std::cout << "\n";
+        f.print();
+        h.print();
+        std::cout << "\n";
     }
 
     return f;
