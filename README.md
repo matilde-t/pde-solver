@@ -40,7 +40,7 @@ The next steps in the development of these project are:
 	- write unit tests :heavy_check_mark:
 - Second phase 
 	- refactor in a object oriented way :heavy_check_mark:
-	- add relaxation schemes 
+	- add relaxation schemes :heavy_check_mark:
 	- add boundary conditions :heavy_check_mark:
 - Third phase
 	- analyze performance
@@ -51,6 +51,7 @@ The next steps in the development of these project are:
 - You can modify the following modules:
   - the **solver**, which is defined in `pdesolver.h` and implemented in the `pdesolver.cpp`
   - the **input matrices** , which are constructed through the `matrix` class, defined in `matrixutils.h` and implemented in the `matrixutils.cpp` 
+  - the **user interface**, defined in `ioutils.h` and implemented in `ioutils.cpp`, so that your changes are easily usable by the end user
 - Once you're done, open a pull request with us on GitLab
 
 ## Authors and acknowledgment
