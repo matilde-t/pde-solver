@@ -84,7 +84,7 @@ int get_iterations(void) {
   return num_it;
 }
 
-void show_steps_prompt(matrix& f, matrix& h, int &num_it) {
+void show_steps_prompt(matrix &f, matrix &h, int &num_it) {
   std::cout << "Do you want to see each iteration step? Y/n\n";
   if (ask_user()) {
     gauss(f, h, num_it, true);
@@ -98,7 +98,7 @@ void show_steps_prompt(matrix& f, matrix& h, int &num_it) {
   }
 }
 
-void save_csv_prompt(matrix& f) {
+void save_csv_prompt(matrix &f) {
   std::cout << "Do you want to save the final matrix? Y/n\n";
   if (ask_user()) {
     std::cout
@@ -113,7 +113,7 @@ void save_csv_prompt(matrix& f) {
   }
 }
 
-void save_plot_prompt(matrix& f) {
+void save_plot_prompt(matrix &f) {
   std::cout << "Do you want to save the final plot? Y/n\n";
   auto save_flag = ask_user();
   std::string name;
