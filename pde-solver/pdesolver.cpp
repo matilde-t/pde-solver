@@ -1,8 +1,7 @@
 #include "pdesolver.h"
 
-matrix solve_pde(matrix &f, const matrix &h, int steps = 50,
-                 bool show_steps = true, bool show_final = false,
-                 int solver_type = 3) {
+matrix solve_pde(matrix &f, const matrix &h, int steps, bool show_steps,
+                 bool show_final, int solver_type) {
   switch (solver_type) {
   case 1: // 1. Diffusion (visual approximation)
     f = diffusion(f, h, steps, show_steps, show_final);
@@ -19,8 +18,8 @@ matrix solve_pde(matrix &f, const matrix &h, int steps = 50,
   return f;
 }
 
-matrix diffusion(matrix &f, const matrix &h, int steps = 50,
-                 bool show_steps = true, bool show_final = false) {
+matrix diffusion(matrix &f, const matrix &h, int steps, bool show_steps,
+                 bool show_final) {
   for (int t = 1; t <= steps; ++t) {
     for (int i = 1; i < f._m.size() - 1; ++i) {
       for (int j = 1; j < f._m[i].size() - 1; ++j) {
