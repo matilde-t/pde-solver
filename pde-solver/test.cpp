@@ -1,8 +1,9 @@
 #define CATCH_CONFIG_MAIN
 #include "matrixutils.h"
-#include "pdesolver.h"
+#include "solver.h"
 #include <catch2/catch.hpp>
 #include <cstdint>
+#include <memory>
 
 std::vector<std::vector<double>> test_matrix = {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -34,21 +35,47 @@ std::vector<double> one_vect{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 std::vector<std::vector<double>> f(n, one_vect);
 std::vector<std::vector<double>> h(n, zero_vect);
 int steps = 4000;
-double tol = 1e-06;
-std::vector<double> tol_vect(n, tol);
-std::vector<std::vector<double>> tol_mat(n, tol_vect);
+double tol = 1e-04;
 
 matrix f_m(f);
 matrix h_m(h);
 
 TEST_CASE("Test and benchmark pde-solver") {
-  matrix a = solve_pde(f_m, h_m, steps, false, false, 3);
-  REQUIRE(a.size() == test_matrix.size());
-  REQUIRE(std::cout << a[1][1] - test_matrix[1][1]);
+  std::unique_ptr<solver_manager> pde_solver;
+  SECTION("Diffusion solver") {
+    pde_solver = std::make_unique<diffusion>(f_m, h_m, steps, false, false);
+    matrix a = pde_solver->solve();
+    REQUIRE(a.size() == test_matrix.size());
+    REQUIRE(std::cout << a[1][1] - test_matrix[1][1]);
 
-  for (int i = 2; i < a.size() - 2; ++i) {
-    for (int j = 2; j < a[i].size() - 2; ++j) {
-      REQUIRE(std::abs(a[i][j] - test_matrix[i][j]) < 0.8);
+    for (int i = 2; i < a.size() - 2; ++i) {
+      for (int j = 2; j < a[i].size() - 2; ++j) {
+        REQUIRE(std::abs(a[i][j] - test_matrix[i][j]) < tol);
+      }
+    }
+  }
+  SECTION("Jacobi solver") {
+    pde_solver = std::make_unique<jacobi>(f_m, h_m, steps, false, false);
+    matrix a = pde_solver->solve();
+    REQUIRE(a.size() == test_matrix.size());
+    REQUIRE(std::cout << a[1][1] - test_matrix[1][1]);
+
+    for (int i = 2; i < a.size() - 2; ++i) {
+      for (int j = 2; j < a[i].size() - 2; ++j) {
+        REQUIRE(std::abs(a[i][j] - test_matrix[i][j]) < tol);
+      }
+    }
+  }
+  SECTION("Gauss-Seidel solver") {
+    pde_solver = std::make_unique<gauss>(f_m, h_m, steps, false, false);
+    matrix a = pde_solver->solve();
+    REQUIRE(a.size() == test_matrix.size());
+    REQUIRE(std::cout << a[1][1] - test_matrix[1][1]);
+
+    for (int i = 2; i < a.size() - 2; ++i) {
+      for (int j = 2; j < a[i].size() - 2; ++j) {
+        REQUIRE(std::abs(a[i][j] - test_matrix[i][j]) < tol);
+      }
     }
   }
 }
