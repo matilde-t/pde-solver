@@ -10,25 +10,25 @@ The solver was benchmarked, obtaining the results shown in the following table:
 | -------------- | ----------- | ------------ | ------------ | 
 |                | mean        | low mean     | high mean    |     
 |                | std dev     | low std dev  | high std dev |    
-| -------------- | ----------- | ------------ | ---------    | 
-|                |             |              |              |     
-| Benchmark name | Samples     | Iterations   | Estimated    |  
+
+
+| Diffusion | Samples     | Iterations   | Estimated    |  
 | -------------- | ----------- | ------------ | ------------ | 
-|        Diffusion        |  100  |   1  |  1.12728 s   |  
+|               |  100  |   1  |  1.12728 s   |  
 |                | 11.2673 ms  |  11.2522 ms  |  11.2828 ms   |  
 |                | 78.1882 us  |   69.031 us  |   90.6525 us   |  
-| -------------- | ----------- | ------------ | ---------    | 
-|                |             |              |              |     
-| Benchmark name | Samples     | Iterations   | Estimated    |  
+
+
+| Jacobi    | Samples     | Iterations   | Estimated    |  
 | -------------- | ----------- | ------------ | ------------ | 
-|        Jacobi        |  100      |         1    |  143.387 ms  | 
+|             |  100      |         1    |  143.387 ms  | 
 |                |  1.43005 ms   |   1.42343 ms   |    1.4383 ms  | 
 |                |  37.3863 us    |   31.027 us    |  47.4977 us  |   
-| -------------- | ----------- | ------------ | ---------    | 
-|                |             |              |              |     
-| Benchmark name | Samples     | Iterations   | Estimated    |
+
+
+| Gauss-Seidel | Samples     | Iterations   | Estimated    |
 | -------------- | ----------- | ------------ | ------------ |
-|         Gauss-Seidel       |  100       |        1  |    566.289 ms  | 
+|                |  100       |        1  |    566.289 ms  | 
 |                |  5.62072 ms  |    5.60853 ms    |  5.63598 ms  | 
 |                |  69.3318 us    |  54.8678 us  |    93.2107 us | 
 | -------------- | ----------- | ------------ | ---------    |
