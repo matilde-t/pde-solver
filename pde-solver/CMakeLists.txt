@@ -4,7 +4,7 @@ project(pde-solver LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set (CMAKE_CXX_FLAGS "-O3")
+set(CMAKE_CXX_FLAGS "-O3")
 
 add_executable(pde-solver main.cpp ioutils.cpp matrixutils.cpp solver.cpp ioutils.h matrixutils.h solver.h)
 
