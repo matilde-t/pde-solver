@@ -40,6 +40,7 @@ jacobi::jacobi(matrix &f, const matrix &h, const int steps,
 matrix jacobi::solve() {
   double dx = 1;
   double dy = 1;
+  double dx_dy = dx*dy;
   double term = 2 * ((dx * dx + dy * dy) / (dx * dx * dy * dy));
   double error = 1e-4;
   double tol = 1e-5;
@@ -49,13 +50,13 @@ matrix jacobi::solve() {
     for (int i = 1; i < f._m.size() - 1; ++i) {
       for (int j = 1; j < f._m[i].size() - 1; ++j) {
 
-        f._m[i][j] = ((f_old._m[i + 1][j] + f_old._m[i - 1][j]) / (dx * dx) +
-                      (f_old._m[i][j + 1] + f_old._m[i][j - 1]) / (dy * dy) +
+        f._m[i][j] = ((f_old._m[i + 1][j] + f_old._m[i - 1][j]) / dx_dy +
+                      (f_old._m[i][j + 1] + f_old._m[i][j - 1]) / dx_dy +
                       h._m[i][j]) /
                      term;
       }
     }
-    f_old = f;
+    std::swap(f_old._m, f._m);
     if (show_steps) {
       f.print();
       std::cout << "\n";
@@ -81,18 +82,20 @@ matrix gauss::solve() {
   double error = 1e-4; // 1e-4;
   double tol = 1e-5;   // 1e-5;
   matrix f_old = f;
+  double pow_dx = pow(dx, 2);
+  double pow_dy = pow(dy, 2);
 
   for (int t = 1; t <= steps && error > tol; ++t) {
     for (int i = 1; i < f._m.size() - 1; ++i) {
       for (int j = 1; j < f._m[i].size() - 1; ++j) {
 
         f._m[i][j] =
-            ((f._m[i + 1][j] + f._m[i - 1][j]) / pow(dx, 2) +
-             (f._m[i][j + 1] + f._m[i][j - 1]) / pow(dy, 2) + h._m[i][j]) /
+            ((f._m[i + 1][j] + f._m[i - 1][j]) / pow_dx +
+             (f._m[i][j + 1] + f._m[i][j - 1]) / pow_dy + h._m[i][j]) /
             term;
       }
     }
-    f_old = f;
+    std::swap(f_old._m, f._m);
     if (show_steps) {
       f.print();
     }
