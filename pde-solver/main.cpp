@@ -1,13 +1,12 @@
 #include "ioutils.h"
 #include "matrixutils.h"
 #include "pdesolver.h"
-#include "plotutils.h"
 #include <iostream>
 #include <matplot/matplot.h>
 #include <string>
 
 int main() {
-  int dim1_input, dim2_input, f_type, h_type;
+  int dim1_input, dim2_input, f_type, h_type, solver_type;
   std::cout
       << "Let's build a 2D matrix (NxM) for the heat distribution\n"
          "It must be at least a 3x3 matrix\n"
@@ -23,14 +22,15 @@ int main() {
   if (dim2_input < 3) {
     throw(std::invalid_argument("Invalid dimension"));
   }
-  auto f = create_matrix(dim1_input, dim2_input);
-  auto h = f;
+  matrix f = matrix(dim1_input, dim2_input);
+  matrix h = matrix(dim1_input, dim2_input);
 
   std::cout
-      << "Please your desired f from the following list:\n 1. Plate with no "
+      << "Please choose your desired f from the following list:\n 1. Plate with no "
          "heat\n 2. Plate with left heated border\n\n";
   std::cin >> f_type;
-  f = populate_matrix(f, f_type, 'f');
+  
+  f.populate(f_type, 'f');
 
   std::cout << "Please choose your desired h (internal heat/sink source "
                "distribution) from the following list:\n 1. No internal heat "
@@ -38,39 +38,41 @@ int main() {
                "2. One heat source in the middle\n 3. Two heat sources, "
                "equispaced\n 4. One heat source and one sink, equispaced\n\n";
   std::cin >> h_type;
-  h = populate_matrix(h, h_type, 'h');
+  h.populate(h_type, 'h');
 
   std::cout << "Your matrices are\n f:\n";
-  print_matrix(f);
+  f.print();
   std::cout << "h:\n";
-  print_matrix(h);
+  h.print();
 
   std::cin.clear();
   std::cin.ignore();
 
-  int num_it;
   std::cout
-      << "The default number of iterations is 50, do you want to change it? "
-         "Y/n\n";
+      << "Please choose your desired relaxation method from the following list:\n 1. Diffusion (visual approximation) \n 2. Jacobi \n 3. Gauss-Seidel\n\n";
+  std::cin >> solver_type;
 
+  int num_it;
+  std::cout << "The default number of iterations is 50, do you want to change it? Y/n\n";
+  auto ask = ask_user();
   if (ask_user()) {
-    std::cout << "How many iterations do you want?\n";
-    std::string line;
-    getline(std::cin, line);
-    num_it = stoi(line);
+      std::cout << "How many iterations do you want?\n";
+      std::string line;
+      getline(std::cin, line);
+      num_it = stoi(line);
   } else {
-    num_it = 50;
+      num_it = 50;
   }
 
   std::cout << "Do you want to see each iteration step? Y/n\n";
   if (ask_user()) {
-    solve_pde(f, h, num_it, true);
+    solve_pde(f, h, num_it, true, solver_type);
   } else {
     std::cout << "Do you want to see the final step? Y/n\n";
     if (ask_user()) {
-      solve_pde(f, h, num_it, false, true);
+      solve_pde(f, h, num_it, false, true, solver_type);
     } else {
-      solve_pde(f, h, num_it, false, false);
+      solve_pde(f, h, num_it, false, false, solver_type);
     }
   }
 
@@ -82,7 +84,7 @@ int main() {
     std::string name;
     getline(std::cin, name);
     name.append(".csv");
-    save_csv(f, name);
+    f.save_csv(name);
   }
 
   std::cout << "Do you want to save the final plot? Y/n\n";
@@ -95,7 +97,7 @@ int main() {
     name.append(".png");
   }
 
-  plot(f);
+  f.plot();
   if (save_flag) {
     matplot::save(name);
   }

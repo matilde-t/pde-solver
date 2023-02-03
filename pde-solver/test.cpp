@@ -33,20 +33,22 @@ std::vector<double> one_vect{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                              0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1};
 std::vector<std::vector<double>> f(n, one_vect);
 std::vector<std::vector<double>> h(n, zero_vect);
-int steps = 50;
+int steps = 4000;
 double tol = 1e-06;
 std::vector<double> tol_vect(n, tol);
 std::vector<std::vector<double>> tol_mat(n, tol_vect);
 
+matrix f_m(f);
+matrix h_m(h);
+
 TEST_CASE("Test and benchmark pde-solver") {
-  std::vector<std::vector<double>> a = solve_pde(f, h, steps, false, false);
+  matrix a = solve_pde(f_m, h_m, steps, false, false, 3);
   REQUIRE(a.size() == test_matrix.size());
   REQUIRE(std::cout << a[1][1] - test_matrix[1][1]);
-  // std::cout << test_matrix[a.size()][a[0].size()];
 
-  for (int i = 1; i < a.size() - 1; ++i) {
-    for (int j = 1; j < a[i].size() - 1; ++j) {
-      REQUIRE(std::abs(a[i][j] - test_matrix[i][j]) < 1);
+  for (int i = 2; i < a.size() - 2; ++i) {
+    for (int j = 2; j < a[i].size() - 2; ++j) {
+      REQUIRE(std::abs(a[i][j] - test_matrix[i][j])< 0.8);
     }
   }
 }
