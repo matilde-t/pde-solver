@@ -10,7 +10,7 @@
 This package implements a numerical solution for the heat equation in the form $`f = h`$, where $`f = \nabla^2u`$ and $`h = \frac{\partial u}{\partial t}`$.  
 
 ## Visuals
-![10x10 matrix, left heated border, one heat source and one sink, equispaced](./READMEimage.png "10x10 matrix, left heated border, one heat source and one sink, equispaced")
+![50x50 matrix, left heated border, one heat source and one sink, equispaced, Jacobi solver](./READMEplot.png "50x50 matrix, left heated border, one heat source and one sink, equispaced, Jacobi solver")
 
 ## Prerequisites
 The graphical representation relies on `gnuplot`, which can be installed through the main Linux package managers, like `apt` etc
@@ -30,7 +30,7 @@ The graphical representation relies on `gnuplot`, which can be installed through
 ## Usage
 The instructions that produced the image in [Visuals](#visuals) are, for example:
 
-[![asciicast](https://asciinema.org/a/VAzVuzcxOMZWgGsPBOsqIRy9U.svg)](https://asciinema.org/a/VAzVuzcxOMZWgGsPBOsqIRy9U)
+[![asciicast](https://asciinema.org/a/bYu6w5TmZo7fsoSa0zYSlkBA5.svg)](https://asciinema.org/a/bYu6w5TmZo7fsoSa0zYSlkBA5)
 
 ## Support
 If you have any issue, [contact us](mailto:ge83bug(at)tum.de).
