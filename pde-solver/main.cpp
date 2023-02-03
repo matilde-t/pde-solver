@@ -5,15 +5,12 @@
 #include <memory>
 #include <thread>
 
-int main() {
+int main(int argc, char *argv[]) {
 
-  auto dim_input = get_dim();
-  matrix f = matrix(dim_input[0], dim_input[1]);
-  matrix h = matrix(dim_input[0], dim_input[1]);
+  auto read = read_matrix(argc, argv);
 
-  f.populate(get_f(), 'f');
-
-  h.populate(get_h(), 'h');
+  auto f = read[0];
+  auto h = read[1];
 
   std::cout << "Your matrices are\n f:\n";
   f.print();

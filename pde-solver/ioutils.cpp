@@ -13,6 +13,41 @@ bool ask_user(void) {
   }
 }
 
+std::vector<matrix> read_matrix(int argc, char *argv[]) {
+  std::vector<matrix> result;
+  if (argc == 3) {
+    std::cout << "Detected user-given files, trying to read...\n";
+    matrix f = matrix(argv[1]);
+    matrix h = matrix(argv[2]);
+    result.push_back(f);
+    result.push_back(h);
+    if (f.size() != h.size() || f[0].size() != h[0].size()) {
+      std::cout
+          << "Error: incomptabile sizes! Reverting to standard version \n";
+      auto dim_input = get_dim();
+      matrix f = matrix(dim_input[0], dim_input[1]);
+      matrix h = matrix(dim_input[0], dim_input[1]);
+
+      f.populate(get_f(), 'f');
+
+      h.populate(get_h(), 'h');
+      result.push_back(f);
+      result.push_back(h);
+    }
+  } else {
+    auto dim_input = get_dim();
+    matrix f = matrix(dim_input[0], dim_input[1]);
+    matrix h = matrix(dim_input[0], dim_input[1]);
+
+    f.populate(get_f(), 'f');
+
+    h.populate(get_h(), 'h');
+    result.push_back(f);
+    result.push_back(h);
+  }
+  return result;
+}
+
 std::array<int, 2> get_dim(void) {
   std::array<int, 2> dim;
   std::cout

@@ -12,6 +12,8 @@ enum Solvers : int { Diffusion, Jacobi, Gauss };
 
 bool ask_user(void);
 
+std::vector<matrix> read_matrix(int argc, char *argv[]);
+
 std::array<int, 2> get_dim(void);
 
 int get_f(void);

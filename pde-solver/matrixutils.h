@@ -18,6 +18,7 @@ private:
 
 public:
   matrix(int dim1, int dim2);
+  matrix(char *path);
   matrix(std::vector<std::vector<double>> mat);
   void populate(int m_type, char switch_options);
   void print() const;

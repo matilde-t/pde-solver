@@ -23,6 +23,30 @@ matrix::matrix(int dim1, int dim2) {
 
 matrix::matrix(std::vector<std::vector<double>> mat) { _m = mat; }
 
+matrix::matrix(char *path) {
+  std::ifstream input(path);
+  std::string line;
+  std::vector<std::vector<double>> m;
+  while (std::getline(input, line)) {
+    size_t i = 0;
+    size_t j = 0;
+    std::vector<double> row;
+    while (i != line.length()) {
+      j = line.find(',', j);
+      if (j != std::string::npos) {
+        row.push_back(std::stod(line.substr(i, j - i)));
+        j++;
+        i = j;
+      } else {
+        row.push_back(std::stod(line.substr(i, line.length() - i)));
+        i = line.length();
+      }
+    }
+    m.push_back(row);
+  }
+  _m = m;
+};
+
 // Populate matrix with predefined cases
 void matrix::populate(int m_type, char switch_options) {
   if (switch_options == 'f') {
