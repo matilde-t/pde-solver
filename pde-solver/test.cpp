@@ -48,7 +48,7 @@ TEST_CASE("Test and benchmark pde-solver") {
 
   for (int i = 2; i < a.size() - 2; ++i) {
     for (int j = 2; j < a[i].size() - 2; ++j) {
-      REQUIRE(std::abs(a[i][j] - test_matrix[i][j])< 0.8);
+      REQUIRE(std::abs(a[i][j] - test_matrix[i][j]) < 0.8);
     }
   }
 }

@@ -10,7 +10,7 @@
 
 template <typename T> void print_vector(const std::vector<T> &v);
 
-double calcAvg(std::vector<double> &v);
+double calc_avg(std::vector<double> &v);
 
 class matrix {
 private:
@@ -30,14 +30,19 @@ public:
   std::vector<double> operator[](int i);
   matrix operator-(const matrix &other);
 
-  friend matrix solve_pde(matrix &f, const matrix &h, int steps,
-                          bool show_steps, bool show_final, int solver_type);
-  friend matrix diffusion(matrix &f, const matrix &h, int steps,
-                          bool show_steps, bool show_final);
-  friend matrix jacobi(matrix &f, const matrix &h, int steps, bool show_steps,
-                       bool show_final);
-  friend matrix gauss(matrix &f, const matrix &h, int steps, bool show_steps,
-                      bool show_final);
+  friend class diffusion;
+  friend class jacobi;
+  friend class gauss;
+  /*
+    friend matrix solve_pde(matrix &f, const matrix &h, int steps,
+                            bool show_steps, bool show_final, int solver_type);
+    friend matrix diffusion(matrix &f, const matrix &h, int steps,
+                            bool show_steps, bool show_final);
+    friend matrix jacobi(matrix &f, const matrix &h, int steps, bool show_steps,
+                         bool show_final);
+    friend matrix gauss(matrix &f, const matrix &h, int steps, bool show_steps,
+                        bool show_final);
+                        */
 };
 
 #endif // MATRIXUTILS_H

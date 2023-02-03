@@ -7,7 +7,7 @@ template <typename T> void print_vector(const std::vector<T> &v) {
   std::cout << "\n";
 }
 
-double calcAvg(
+double calc_avg(
     std::vector<double> &v) { // computes the average for a vector of doubles
   int const count = static_cast<float>(v.size());
   return std::reduce(v.begin(), v.end()) / count;
@@ -123,7 +123,7 @@ double matrix::avg() { // computes the average for a 2D matrix expressed as a
                        // vector of vectors with doubles
   double sum = 0;
   for (std::vector<double> &subvect : _m) {
-    sum += calcAvg(subvect) / _m.size();
+    sum += calc_avg(subvect) / _m.size();
   }
   return sum;
 }

@@ -2,7 +2,6 @@
 #define IOUTILS_H
 
 #include "matrixutils.h"
-#include "pdesolver.h"
 #include <array>
 #include <filesystem>
 #include <iostream>
@@ -20,7 +19,7 @@ int get_solver(void);
 
 int get_iterations(void);
 
-void show_steps_prompt(matrix &f, matrix &h, int &num_it);
+std::array<bool, 2> get_steps(void);
 
 void save_csv_prompt(matrix &f);
 

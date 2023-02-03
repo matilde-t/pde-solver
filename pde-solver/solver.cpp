@@ -1,25 +1,15 @@
-#include "pdesolver.h"
+#include "solver.h"
 
-matrix solve_pde(matrix &f, const matrix &h, int steps, bool show_steps,
-                 bool show_final, int solver_type) {
-  switch (solver_type) {
-  case 1: // 1. Diffusion (visual approximation)
-    f = diffusion(f, h, steps, show_steps, show_final);
-    break;
-  case 2: // 2. Jacobi
-    f = jacobi(f, h, steps, show_steps, show_final);
-    break;
-  case 3: // 3. Gauss-Seidel
-    f = gauss(f, h, steps, show_steps, show_final);
-    break;
-  default:
-    throw(std::invalid_argument("Invalid option"));
-  }
-  return f;
-}
+solver_manager::solver_manager(matrix &f, const matrix &h, const int steps,
+                               const bool show_steps, const bool show_final)
+    : f(f), h(h), steps(steps), show_steps(show_steps),
+      show_final(show_final){};
 
-matrix diffusion(matrix &f, const matrix &h, int steps, bool show_steps,
-                 bool show_final) {
+diffusion::diffusion(matrix &f, const matrix &h, const int steps,
+                     const bool show_steps, const bool show_final)
+    : solver_manager(f, h, steps, show_steps, show_final){};
+
+matrix diffusion::solve() {
   for (int t = 1; t <= steps; ++t) {
     for (int i = 1; i < f._m.size() - 1; ++i) {
       for (int j = 1; j < f._m[i].size() - 1; ++j) {
@@ -39,11 +29,15 @@ matrix diffusion(matrix &f, const matrix &h, int steps, bool show_steps,
     f.print();
     std::cout << "\n";
   }
-  return f;
-}
 
-matrix jacobi(matrix &f, const matrix &h, int steps, bool show_steps,
-              bool show_final) {
+  return f;
+};
+
+jacobi::jacobi(matrix &f, const matrix &h, const int steps,
+               const bool show_steps, const bool show_final)
+    : solver_manager(f, h, steps, show_steps, show_final){};
+
+matrix jacobi::solve() {
   double dx = 1;
   double dy = 1;
   double term = 2 * ((dx * dx + dy * dy) / (dx * dx * dy * dy));
@@ -72,11 +66,15 @@ matrix jacobi(matrix &f, const matrix &h, int steps, bool show_steps,
     h.print();
     std::cout << "\n";
   }
+
   return f;
 };
 
-matrix gauss(matrix &f, const matrix &h, int steps, bool show_steps,
-             bool show_final) {
+gauss::gauss(matrix &f, const matrix &h, const int steps, const bool show_steps,
+             const bool show_final)
+    : solver_manager(f, h, steps, show_steps, show_final){};
+
+matrix gauss::solve() {
   double dx = 1;
   double dy = 1;
   double term = 2 * ((dx * dx + dy * dy) / (dx * dx * dy * dy));
@@ -104,5 +102,6 @@ matrix gauss(matrix &f, const matrix &h, int steps, bool show_steps,
     f.print();
     std::cout << "\n";
   }
+
   return f;
 };

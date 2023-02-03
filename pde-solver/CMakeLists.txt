@@ -4,8 +4,9 @@ project(pde-solver LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set (CMAKE_CXX_FLAGS "-O3")
 
-add_executable(pde-solver main.cpp ioutils.cpp matrixutils.cpp pdesolver.cpp pdesolver.h ioutils.h matrixutils.h)
+add_executable(pde-solver main.cpp ioutils.cpp matrixutils.cpp solver.cpp)
 
 install(TARGETS pde-solver
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
@@ -49,7 +50,7 @@ target_compile_features(pde-solver PRIVATE cxx_std_17)
 # -----
 
 
-add_executable(pde-solver-test test.cpp ioutils.cpp matrixutils.cpp pdesolver.cpp pdesolver.h ioutils.h matrixutils.h)
+add_executable(pde-solver-test test.cpp ioutils.cpp matrixutils.cpp solver.cpp)
 
 install(TARGETS pde-solver-test
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})

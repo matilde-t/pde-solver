@@ -84,18 +84,18 @@ int get_iterations(void) {
   return num_it;
 }
 
-void show_steps_prompt(matrix &f, matrix &h, int &num_it) {
+std::array<bool, 2> get_steps() {
+  std::array steps = {false, false};
   std::cout << "Do you want to see each iteration step? Y/n\n";
   if (ask_user()) {
-    gauss(f, h, num_it, true);
+    steps[0] = true;
   } else {
     std::cout << "Do you want to see the final step? Y/n\n";
     if (ask_user()) {
-      gauss(f, h, num_it, false, true);
-    } else {
-      gauss(f, h, num_it, false, false);
+      steps[1] = true;
     }
   }
+  return steps;
 }
 
 void save_csv_prompt(matrix &f) {

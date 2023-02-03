@@ -1,6 +1,8 @@
 #include "ioutils.h"
 #include "matrixutils.h"
+#include "solver.h"
 #include <iostream>
+#include <memory>
 
 int main() {
 
@@ -21,7 +23,25 @@ int main() {
 
   auto num_it = get_iterations();
 
-  show_steps_prompt(f, h, num_it);
+  auto steps = get_steps();
+
+  std::unique_ptr<solver_manager> pde_solver;
+
+  switch (solver_type) {
+  case 1: // 1. Diffusion (visual approximation)
+    pde_solver = std::make_unique<diffusion>(f, h, num_it, steps[0], steps[1]);
+    break;
+  case 2: // 2. Jacobi
+    pde_solver = std::make_unique<jacobi>(f, h, num_it, steps[0], steps[1]);
+    break;
+  case 3: // 3. Gauss-Seidel
+    pde_solver = std::make_unique<gauss>(f, h, num_it, steps[0], steps[1]);
+    break;
+  default:
+    throw(std::invalid_argument("Invalid option"));
+  }
+
+  f = pde_solver->solve();
 
   save_csv_prompt(f);
 
