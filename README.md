@@ -10,7 +10,7 @@
 This package implements a numerical solution for the heat equation in the form $`f = h`$, where $`f = \nabla^2u`$ and $`h = \frac{\partial u}{\partial t}`$.  
 
 ## Visuals
-![50x50 matrix, left heated border, one heat source and one sink, equispaced, Jacobi solver](./READMEplot.png "50x50 matrix, left heated border, one heat source and one sink, equispaced, Jacobi solver")
+![50x50 matrix, left heated border, one heat source and one sink, equispaced, Jacobi solver](./README_plot.png "50x50 matrix, left heated border, one heat source and one sink, equispaced, Jacobi solver")
 
 ## Prerequisites
 The graphical representation relies on `gnuplot`, which can be installed through the main Linux package managers, like `apt` etc
@@ -25,7 +25,7 @@ The graphical representation relies on `gnuplot`, which can be installed through
 5. call `make`
 6. execute the program in the terminal with `./pde-solver` and follow the instructions on screen
 
-:heavy_exclamation_mark:**NEW** the program can now be used with custom matrices in `.csv` format (N.B. only files with comma delimiters are supported at the moment). In this case, execute the program with `./pde-solver <path to f.csv> <path to h.csv>`
+:exclamation:**NEW** the program can now be used with custom matrices in `.csv` format (N.B. only files with comma delimiters are supported at the moment). In this case, execute the program with `./pde-solver <path to f.csv> <path to h.csv>`
 
 ## Usage
 The instructions that produced the image in [Visuals](#visuals) are, for example:
