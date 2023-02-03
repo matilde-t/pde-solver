@@ -7,6 +7,8 @@
 #include <iostream>
 #include <matplot/matplot.h>
 
+enum Solvers : int { Diffusion, Jacobi, Gauss };
+
 bool ask_user(void);
 
 std::array<int, 2> get_dim(void);
@@ -15,7 +17,7 @@ int get_f(void);
 
 int get_h(void);
 
-int get_solver(void);
+Solvers get_solver(void);
 
 int get_iterations(void);
 

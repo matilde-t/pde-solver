@@ -56,7 +56,7 @@ int get_h(void) {
   return h_type;
 }
 
-int get_solver(void) {
+Solvers get_solver(void) {
   int solver_type;
   std::cout << "Please choose your desired relaxation method from the "
                "following list:\n 1. Diffusion (visual approximation) \n 2. "
@@ -64,7 +64,8 @@ int get_solver(void) {
   std::cin >> solver_type;
   std::cin.clear();
   std::cin.ignore();
-  return solver_type;
+  Solvers s{solver_type-1};
+  return s;
 }
 
 int get_iterations(void) {

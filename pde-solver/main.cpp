@@ -28,13 +28,13 @@ int main() {
   std::unique_ptr<solver_manager> pde_solver;
 
   switch (solver_type) {
-  case 1: // 1. Diffusion (visual approximation)
+  case Solvers::Diffusion:
     pde_solver = std::make_unique<diffusion>(f, h, num_it, steps[0], steps[1]);
     break;
-  case 2: // 2. Jacobi
+  case Solvers::Jacobi: 
     pde_solver = std::make_unique<jacobi>(f, h, num_it, steps[0], steps[1]);
     break;
-  case 3: // 3. Gauss-Seidel
+  case Solvers::Gauss: 
     pde_solver = std::make_unique<gauss>(f, h, num_it, steps[0], steps[1]);
     break;
   default:
