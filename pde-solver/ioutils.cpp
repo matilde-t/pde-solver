@@ -78,7 +78,7 @@ int get_f(void) {
   std::cin >> f_type;
   std::cin.clear();
   std::cin.ignore();
-  if (f_type != 1 || f_type != 2) {
+  if (f_type < 1 || f_type > 2) {
     std::cout << "Invalid f: default 1. Plate with no heat\n";
     f_type = 1;
   }
@@ -95,7 +95,7 @@ int get_h(void) {
   std::cin >> h_type;
   std::cin.clear();
   std::cin.ignore();
-  if (h_type != (1 || 2 || 3 || 4)) {
+  if (h_type < 1 || h_type > 4) {
     std::cout << "Invalid h: default 1. No internal heat sources\n";
     h_type = 1;
     std::chrono::milliseconds sleep_time(3000);

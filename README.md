@@ -25,6 +25,8 @@ The graphical representation relies on `gnuplot`, which can be installed through
 5. call `make`
 6. execute the program in the terminal with `./pde-solver` and follow the instructions on screen
 
+:heavy_exclamation_mark:**NEW** the program can now be used with custom matrices in `.csv` format (N.B. only files with comma delimiters are supported at the moment). In this case, execute the program with `./pde-solver <path to f.csv> <path to h.csv>`
+
 ## Usage
 The instructions that produced the image in [Visuals](#visuals) are, for example:
 
@@ -43,13 +45,14 @@ The next steps in the development of these project are:
 	- add relaxation schemes :heavy_check_mark:
 	- add boundary conditions :heavy_check_mark:
 - Third phase
-	- analyze performance
-	- improve performance
+	- add support for user-provided input matrices :heavy_check_mark:
+	- analyze performance :heavy_check_mark:
+	- improve performance :heavy_check_mark:
 
 ## Contributing
 - Fork the project
 - You can modify the following modules:
-  - the **solver**, which is defined in `pdesolver.h` and implemented in the `pdesolver.cpp`
+  - the **solver**, which is defined in `solver.h` and implemented in the `solver.cpp`
   - the **input matrices** , which are constructed through the `matrix` class, defined in `matrixutils.h` and implemented in the `matrixutils.cpp` 
   - the **user interface**, defined in `ioutils.h` and implemented in `ioutils.cpp`, so that your changes are easily usable by the end user
 - Once you're done, open a pull request with us on GitLab
