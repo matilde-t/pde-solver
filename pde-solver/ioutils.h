@@ -6,6 +6,7 @@
 #include <filesystem>
 #include <iostream>
 #include <matplot/matplot.h>
+#include <thread>
 
 enum Solvers : int { Diffusion, Jacobi, Gauss };
 
