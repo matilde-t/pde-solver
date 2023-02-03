@@ -31,8 +31,6 @@ The solver was benchmarked, obtaining the results shown in the following table:
 |                |  100       |        1  |    566.289 ms  | 
 |                |  5.62072 ms  |    5.60853 ms    |  5.63598 ms  | 
 |                |  69.3318 us    |  54.8678 us  |    93.2107 us | 
-| -------------- | ----------- | ------------ | ---------    |
-|                |             |              |              |
 
 *Note that the non-solver parts of the software have not been benchmarked, as they are dependent on user input and have a minimal impact in performance.
 
