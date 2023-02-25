@@ -1,106 +1,57 @@
 #include "ioutils.h"
 #include "matrixutils.h"
-#include "pdesolver.h"
+#include "solver.h"
 #include <iostream>
-#include <matplot/matplot.h>
-#include <string>
+#include <memory>
+#include <thread>
 
-int main() {
-  int dim1_input, dim2_input, f_type, h_type, solver_type;
-  std::cout
-      << "Let's build a 2D matrix (NxM) for the heat distribution\n"
-         "It must be at least a 3x3 matrix\n"
-         "First, please input the desired row dimension (N) of your 2D matrix "
-         ": ";
-  std::cin >> dim1_input;
-  if (dim1_input < 3) {
-    throw(std::invalid_argument("Invalid dimension"));
-  }
-  std::cout << "Now, please input the desired column dimension (M) of your 2D "
-               "matrix : ";
-  std::cin >> dim2_input;
-  if (dim2_input < 3) {
-    throw(std::invalid_argument("Invalid dimension"));
-  }
-  matrix f = matrix(dim1_input, dim2_input);
-  matrix h = matrix(dim1_input, dim2_input);
+int main(int argc, char *argv[]) {
 
-  std::cout
-      << "Please choose your desired f from the following list:\n 1. Plate with no "
-         "heat\n 2. Plate with left heated border\n\n";
-  std::cin >> f_type;
-  
-  f.populate(f_type, 'f');
+  auto read = read_matrix(argc, argv);
 
-  std::cout << "Please choose your desired h (internal heat/sink source "
-               "distribution) from the following list:\n 1. No internal heat "
-               "sources\n "
-               "2. One heat source in the middle\n 3. Two heat sources, "
-               "equispaced\n 4. One heat source and one sink, equispaced\n\n";
-  std::cin >> h_type;
-  h.populate(h_type, 'h');
+  auto f = read[0];
+  auto h = read[1];
 
   std::cout << "Your matrices are\n f:\n";
   f.print();
   std::cout << "h:\n";
   h.print();
 
-  std::cin.clear();
-  std::cin.ignore();
+  auto solver_type = get_solver();
 
-  std::cout
-      << "Please choose your desired relaxation method from the following list:\n 1. Diffusion (visual approximation) \n 2. Jacobi \n 3. Gauss-Seidel\n\n";
-  std::cin >> solver_type;
+  auto num_it = get_iterations();
 
-  int num_it;
-  std::cout << "The default number of iterations is 50, do you want to change it? Y/n\n";
-  auto ask = ask_user();
-  if (ask_user()) {
-      std::cout << "How many iterations do you want?\n";
-      std::string line;
-      getline(std::cin, line);
-      num_it = stoi(line);
-  } else {
-      num_it = 50;
-  }
+  auto steps = get_steps();
 
-  std::cout << "Do you want to see each iteration step? Y/n\n";
-  if (ask_user()) {
-    solve_pde(f, h, num_it, true, solver_type);
-  } else {
-    std::cout << "Do you want to see the final step? Y/n\n";
-    if (ask_user()) {
-      solve_pde(f, h, num_it, false, true, solver_type);
-    } else {
-      solve_pde(f, h, num_it, false, false, solver_type);
+  std::unique_ptr<solver_manager> pde_solver;
+
+  try {
+    switch (solver_type) {
+    case Solvers::Diffusion:
+      pde_solver =
+          std::make_unique<diffusion>(f, h, num_it, steps[0], steps[1]);
+      break;
+    case Solvers::Jacobi:
+      pde_solver = std::make_unique<jacobi>(f, h, num_it, steps[0], steps[1]);
+      break;
+    case Solvers::Gauss:
+      pde_solver = std::make_unique<gauss>(f, h, num_it, steps[0], steps[1]);
+      break;
+    default:
+      throw(std::invalid_argument("Invalid option"));
     }
+  } catch (...) {
+    std::chrono::milliseconds sleep_time(3000);
+    std::cout << "Invalid solver selected: auto select Gauss-Seidel... \n";
+    std::this_thread::sleep_for(sleep_time);
+    pde_solver = std::make_unique<gauss>(f, h, num_it, steps[0], steps[1]);
   }
 
-  std::cout << "Do you want to save the final matrix? Y/n\n";
-  if (ask_user()) {
-    std::cout
-        << "Please input the name of the file you want to save the matrix "
-           "into (without extension):\n";
-    std::string name;
-    getline(std::cin, name);
-    name.append(".csv");
-    f.save_csv(name);
-  }
+  f = pde_solver->solve();
 
-  std::cout << "Do you want to save the final plot? Y/n\n";
-  auto save_flag = ask_user();
-  std::string name;
-  if (save_flag) {
-    std::cout << "Please input the name of the file you want to save the plot "
-                 "into (without extension):\n";
-    getline(std::cin, name);
-    name.append(".png");
-  }
+  save_csv_prompt(f);
 
-  f.plot();
-  if (save_flag) {
-    matplot::save(name);
-  }
+  save_plot_prompt(f);
 
   return 0;
 }

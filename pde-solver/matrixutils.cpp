@@ -1,8 +1,4 @@
 #include "matrixutils.h"
-#include <cmath>
-#include <fstream>
-#include <iostream>
-#include <matplot/matplot.h>
 
 template <typename T> void print_vector(const std::vector<T> &v) {
   for (const auto &elem : v) {
@@ -11,11 +7,11 @@ template <typename T> void print_vector(const std::vector<T> &v) {
   std::cout << "\n";
 }
 
-double calcAvg(std::vector<double>& v){  // computes the average for a vector of doubles
-    int const count = static_cast<float>(v.size());
-    return std::reduce(v.begin(), v.end()) / count;
+double calc_avg(
+    std::vector<double> &v) { // computes the average for a vector of doubles
+  int const count = static_cast<float>(v.size());
+  return std::reduce(v.begin(), v.end()) / count;
 }
-
 
 // Matrix methods
 
@@ -26,6 +22,30 @@ matrix::matrix(int dim1, int dim2) {
 };
 
 matrix::matrix(std::vector<std::vector<double>> mat) { _m = mat; }
+
+matrix::matrix(char *path) {
+  std::ifstream input(path);
+  std::string line;
+  std::vector<std::vector<double>> m;
+  while (std::getline(input, line)) {
+    size_t i = 0;
+    size_t j = 0;
+    std::vector<double> row;
+    while (i != line.length()) {
+      j = line.find(',', j);
+      if (j != std::string::npos) {
+        row.push_back(std::stod(line.substr(i, j - i)));
+        j++;
+        i = j;
+      } else {
+        row.push_back(std::stod(line.substr(i, line.length() - i)));
+        i = line.length();
+      }
+    }
+    m.push_back(row);
+  }
+  _m = m;
+};
 
 // Populate matrix with predefined cases
 void matrix::populate(int m_type, char switch_options) {
@@ -105,42 +125,46 @@ matrix matrix::abs() { // returns matrix with absolute values
   double max = -400;
   auto m = _m;
   for (auto &v : m) {
-      for (auto &n : v) {
-        n = std::abs(n);
-        }
-      }
-  return matrix(m);
+    for (auto &n : v) {
+      n = std::abs(n);
+    }
   }
+  return matrix(m);
+}
 
 double matrix::max() { // returns the maximum value in the matrix
   double max = -400;
   for (const auto &v : _m) {
-      double result = *std::max_element(v.begin(), v.end());
-      if (result > max){
-                   max = result;
+    double result = *std::max_element(v.begin(), v.end());
+    if (result > max) {
+      max = result;
     }
   }
   return max;
 }
 
-double matrix::avg(){  // computes the average for a 2D matrix expressed as a vector of vectors with doubles
-    double sum = 0;
-    for(std::vector<double>& subvect : _m){
-        sum += calcAvg(subvect) / _m.size();
-    }
-    return sum;
+double matrix::avg() { // computes the average for a 2D matrix expressed as a
+                       // vector of vectors with doubles
+  double sum = 0;
+  for (std::vector<double> &subvect : _m) {
+    sum += calc_avg(subvect) / _m.size();
+  }
+  return sum;
 }
 
 size_t matrix::size() { return _m.size(); };
 
 std::vector<double> matrix::operator[](int i) { return _m[i]; }
 
-matrix matrix::operator-(const matrix& other){
-    if (_m.size()!=other._m.size()){throw std::invalid_argument( "Vector dimension mismatch" );}
-    std::vector<std::vector<double>> v3(_m.size());
-    for(int i = 0; i< _m.size(); i++){
-        std::transform(_m[i].begin(), _m[i].end(), other._m[i].begin(), _m[i].begin(), std::minus<double>());
-        v3[i] = _m[i];
-    }
-    return matrix(v3);
+matrix matrix::operator-(const matrix &other) {
+  if (_m.size() != other._m.size()) {
+    throw std::invalid_argument("Vector dimension mismatch");
+  }
+  std::vector<std::vector<double>> v3(_m.size());
+  for (int i = 0; i < _m.size(); i++) {
+    std::transform(_m[i].begin(), _m[i].end(), other._m[i].begin(),
+                   _m[i].begin(), std::minus<double>());
+    v3[i] = _m[i];
+  }
+  return matrix(v3);
 }

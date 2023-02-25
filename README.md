@@ -10,7 +10,7 @@
 This package implements a numerical solution for the heat equation in the form $`f = h`$, where $`f = \nabla^2u`$ and $`h = \frac{\partial u}{\partial t}`$.  
 
 ## Visuals
-![10x10 matrix, left heated border, one heat source and one sink, equispaced](./READMEimage.png "10x10 matrix, left heated border, one heat source and one sink, equispaced")
+![50x50 matrix, left heated border, one heat source and one sink, equispaced, Jacobi solver](./README_plot.png "50x50 matrix, left heated border, one heat source and one sink, equispaced, Jacobi solver")
 
 ## Prerequisites
 The graphical representation relies on `gnuplot`, which can be installed through the main Linux package managers, like `apt` etc
@@ -25,10 +25,12 @@ The graphical representation relies on `gnuplot`, which can be installed through
 5. call `make`
 6. execute the program in the terminal with `./pde-solver` and follow the instructions on screen
 
+:exclamation:**NEW** the program can now be used with custom matrices in `.csv` format (N.B. only files with comma delimiters are supported at the moment). In this case, execute the program with `./pde-solver <path to f.csv> <path to h.csv>`
+
 ## Usage
 The instructions that produced the image in [Visuals](#visuals) are, for example:
 
-[![asciicast](https://asciinema.org/a/VAzVuzcxOMZWgGsPBOsqIRy9U.svg)](https://asciinema.org/a/VAzVuzcxOMZWgGsPBOsqIRy9U)
+[![asciicast](https://asciinema.org/a/bYu6w5TmZo7fsoSa0zYSlkBA5.svg)](https://asciinema.org/a/bYu6w5TmZo7fsoSa0zYSlkBA5)
 
 ## Support
 If you have any issue, [contact us](mailto:ge83bug(at)tum.de).
@@ -40,17 +42,19 @@ The next steps in the development of these project are:
 	- write unit tests :heavy_check_mark:
 - Second phase 
 	- refactor in a object oriented way :heavy_check_mark:
-	- add relaxation schemes 
+	- add relaxation schemes :heavy_check_mark:
 	- add boundary conditions :heavy_check_mark:
 - Third phase
-	- analyze performance
-	- improve performance
+	- add support for user-provided input matrices :heavy_check_mark:
+	- analyze performance :heavy_check_mark:
+	- improve performance :heavy_check_mark:
 
 ## Contributing
 - Fork the project
 - You can modify the following modules:
-  - the **solver**, which is defined in `pdesolver.h` and implemented in the `pdesolver.cpp`
+  - the **solver**, which is defined in `solver.h` and implemented in the `solver.cpp`
   - the **input matrices** , which are constructed through the `matrix` class, defined in `matrixutils.h` and implemented in the `matrixutils.cpp` 
+  - the **user interface**, defined in `ioutils.h` and implemented in `ioutils.cpp`, so that your changes are easily usable by the end user
 - Once you're done, open a pull request with us on GitLab
 
 ## Authors and acknowledgment
