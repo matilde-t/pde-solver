@@ -1,13 +1,7 @@
 # pde-solver
 
-----
-
-[[_TOC_]]
-
-----
-
 ## Description
-This package implements a numerical solution for the heat equation in the form $`f = h`$, where $`f = \nabla^2u`$ and $`h = \frac{\partial u}{\partial t}`$.  
+This package implements a numerical solution for the heat equation in the form $f = h$, where $f = \nabla^2u$ and $h = \frac{\partial u}{\partial t}$.  
 
 ## Visuals
 ![50x50 matrix, left heated border, one heat source and one sink, equispaced, Jacobi solver](./README_plot.png "50x50 matrix, left heated border, one heat source and one sink, equispaced, Jacobi solver")
@@ -55,7 +49,7 @@ The next steps in the development of these project are:
   - the **solver**, which is defined in `solver.h` and implemented in the `solver.cpp`
   - the **input matrices** , which are constructed through the `matrix` class, defined in `matrixutils.h` and implemented in the `matrixutils.cpp` 
   - the **user interface**, defined in `ioutils.h` and implemented in `ioutils.cpp`, so that your changes are easily usable by the end user
-- Once you're done, open a pull request with us on GitLab
+- Once you're done, open a pull request with us
 
 ## Authors and acknowledgment
 Authors: Matilde Tozzi (ge83bug(at)tum.de), Celia Tundidor Centeno (ge87loj(at)mytum.de)
@@ -64,4 +58,4 @@ Authors: Matilde Tozzi (ge83bug(at)tum.de), Celia Tundidor Centeno (ge87loj(at)m
 MIT
 
 ## Project status
-Actively developed.
+Ended.
